@@ -14,3 +14,4 @@ Users will be able to add and remove tickets.
 
 - [ ] Add ticket
 - [ ] Remove ticket
+- [ ] Assign ticket
