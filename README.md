@@ -12,6 +12,5 @@ Users will be able to add and remove tickets.
 
 ## Roadmap
 
-- [ ] Add ticket
+- [x] Add ticket
 - [ ] Remove ticket
-- [ ] Assign ticket
