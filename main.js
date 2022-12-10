@@ -3,6 +3,7 @@ document.getElementById('issueInputForm').addEventListener('submit', saveIssue)
 function fetchIssues() {
     let issues = JSON.parse(localStorage.getItem('issues'))
     let issuesList = document.getElementById('issuesList')
+    console.log(issues)
 
     issuesList.innerHTML = '';
 
@@ -16,7 +17,14 @@ function fetchIssues() {
         let status = issues[i].status
         let statusColor = status == "Closed" ? 'label-success' : 'label-info'
 
-        // issuesList.innerHTML +=
+        issuesList.innerHTML +=
+        '<div class="well">' +
+        '<h6>Issue ID:' + id + '</h6>' +
+        '<p><span class= "label ' +statusColor + ' ">' + status + 
+        '</span></p>' +
+        '<h3>' + subject + '</h3>'
+        '<p>' + description + '</p>' +
+        '</div>'
     }
 }
 
@@ -27,7 +35,7 @@ function saveIssue(e) {
     let issueSeverity= document.getElementById('issueSeverityInput').value
     let issueAssignedTo = document.getElementById('issueAssignedToInput').value
     let issueStatus = 'Open'
-    
+
     // Object to store in localstorage
     let issue = {
         id: issueId,
@@ -37,4 +45,20 @@ function saveIssue(e) {
         assignedTo: issueAssignedTo,
         status: issueStatus
     }
+
+    if(localStorage.getItem('issues')===null) {
+        let issues = []
+        issues.push(issue)
+        localStorage.setItem('issues', JSON.stringify(issues))
+    } else {
+        let issues = JSON.parse(localStorage.getItem('issues'))
+        issues.push(issue)
+        localStorage.setItem('issues', JSON.stringify(issues))
+    }
+
+    document.getElementById('issueInputForm').reset();
+
+    fetchIssues()
+
+    e.preventDefault()
 }
